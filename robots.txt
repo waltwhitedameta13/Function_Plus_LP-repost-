@@ -1,0 +1,11 @@
+# robots.txt para Function Plus
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://seu-usuario.github.io/function-plus/sitemap.xml
+
+# Bloquear acesso a arquivos sensíveis
+Disallow: /.git/
+Disallow: /*.md$

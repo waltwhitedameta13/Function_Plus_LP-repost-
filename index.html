@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function Plus | Ecossistema Digital Integrado</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Archivo:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #0A0E17;
+            --color-surface: #141925;
+            --color-primary: #00E5CC;
+            --color-accent: #F3FF6B;
+            --color-text: #E8EDF4;
+            --color-text-muted: #8B95A8;
+            --color-border: rgba(0, 229, 204, 0.1);
+            --font-display: 'Archivo', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+            background: 
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 229, 204, 0.15), transparent),
+                radial-gradient(ellipse 60% 80% at 10% 40%, rgba(255, 107, 107, 0.1), transparent);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(10, 14, 23, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--color-border);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav a {
+            color: var(--color-text);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-primary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--color-primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 5% 4rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-tag {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background: rgba(0, 229, 204, 0.1);
+            border: 1px solid var(--color-primary);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--color-primary);
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: var(--color-text-muted);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.7;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-family: var(--font-body);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-primary), #00B8A3);
+            color: var(--color-bg);
+            box-shadow: 0 10px 30px rgba(0, 229, 204, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 229, 204, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-text);
+            border: 2px solid var(--color-primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 229, 204, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .section-tag {
+            color: var(--color-primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-description {
+            color: var(--color-text-muted);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--color-primary);
+            box-shadow: 0 20px 60px rgba(0, 229, 204, 0.2);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: var(--color-text-muted);
+            line-height: 1.7;
+        }
+
+        /* Advantages */
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .advantage-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 229, 204, 0.03);
+            border-radius: 15px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .advantage-item:hover {
+            border-color: var(--color-primary);
+            background: rgba(0, 229, 204, 0.08);
+        }
+
+        .advantage-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .advantage-item h4 {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .advantage-item p {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Why Choose Section */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .why-item {
+            background: linear-gradient(135deg, rgba(0, 229, 204, 0.05), rgba(255, 107, 107, 0.05));
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid var(--color-border);
+        }
+
+        .why-item h4 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .why-item p {
+            color: var(--color-text-muted);
+            line-height: 1.7;
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: var(--color-surface);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--color-border);
+            position: relative;
+        }
+
+        .quote-icon {
+            font-size: 3rem;
+            color: var(--color-primary);
+            opacity: 0.3;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            color: var(--color-text);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .author-info h5 {
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info p {
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin-top: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 229, 204, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-link:hover {
+            background: var(--color-primary);
+            color: var(--color-bg);
+            transform: translateY(-5px);
+            border-color: var(--color-primary);
+        }
+
+        /* Form */
+        .form-container {
+            background: var(--color-surface);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid var(--color-border);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 1rem;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            color: var(--color-text);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(0, 229, 204, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, var(--color-primary), #00B8A3);
+            color: var(--color-bg);
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: var(--font-body);
+        }
+
+        .form-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 229, 204, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .footer-text {
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-primary);
+        }
+
+        .copyright {
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+
+            .hero {
+                padding: 6rem 5% 3rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .services-grid,
+            .advantages-grid,
+            .why-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+
+    <header>
+        <div class="logo"> <img src = "logo2.png" height = "55px" > </img> Function+</div>
+        <nav>
+            <a href="#services">Serviços</a>
+            <a href="#vantagens">Vantagens</a>
+            <a href="#por-que">Motivos</a>
+            <a href="#clientes">Clientes</a>
+            <a href="#contato">Contato</a>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-tag">Ecossistema Digital Integrado</span>
+            <h1>
+                Todas as suas <span class="gradient-text">soluções digitais</span><br>
+                em um único lugar
+            </h1>
+            <p class="hero-subtitle">
+                A Function+ reúne tecnologia de ponta e praticidade para simplificar sua vida digital. 
+                Pagamentos, comunicação, tradução e muito mais — tudo integrado perfeitamente.
+            </p>
+            <div class="cta-group">
+                <a href="#contato" class="btn btn-primary">Começar Agora</a>
+                <a href="#services" class="btn btn-secondary">Conheça os Serviços</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- NOSSOS SERVIÇOS -->
+    <section id="services">
+        <div class="section-header">
+            <div class="section-tag">Nossos Serviços</div>
+            <h2>Um ecossistema completo para você</h2>
+            <p class="section-description">
+                Soluções integradas que trabalham juntas para oferecer a melhor experiência digital possível
+            </p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card fade-in stagger-1">
+                <div class="service-icon">💳</div>
+                <h3>Dindin</h3>
+                <p>
+                    Seu aplicativo de pagamento digital. Rápido, seguro e intuitivo. 
+                    Pague, receba e gerencie suas finanças com total controle e praticidade.
+                </p>
+            </div>
+
+            <div class="service-card fade-in stagger-2">
+                <div class="service-icon">🌍</div>
+                <h3>Falow</h3>
+                <p>
+                    Tradutor universal revolucionário. Traduza idiomas humanos e até sons de animais 
+                    usando inteligência artificial avançada. Conecte-se com o mundo de forma única.
+                </p>
+            </div>
+
+            <div class="service-card fade-in stagger-3">
+                <div class="service-icon">💬</div>
+                <h3>Coé</h3>
+                <p>
+                    Comunicação moderna e eficiente. Um aplicativo de mensagens simples, 
+                    funcional e focado no que realmente importa: conectar pessoas.
+                </p>
+            </div>
+			
+			<div class="service-card fade-in stagger-3">
+                <div class="service-icon">📱</div>
+                <h3>Introz</h3>
+                <p>
+                    Aplicativo de postagens e anúncios de empresas. Exponha o seu dia a dia, converse 
+					com amigos e veja anúncios, produtos de empresas e postagens de outras pessoas.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- VANTAGENS -->
+    <section id="vantagens">
+        <div class="section-header">
+            <div class="section-tag">Vantagens</div>
+            <h2>Por que escolher Function Plus?</h2>
+            <p class="section-description">
+                Benefícios que fazem a diferença no seu dia a dia
+            </p>
+        </div>
+
+        <div class="advantages-grid">
+            <div class="advantage-item fade-in stagger-1">
+                <div class="advantage-icon">🔗</div>
+                <h4>Integração Total</h4>
+                <p>Todos os serviços conectados em um único ecossistema fluido e sincronizado</p>
+            </div>
+
+            <div class="advantage-item fade-in stagger-2">
+                <div class="advantage-icon">⚡</div>
+                <h4>Praticidade</h4>
+                <p>Acesse tudo o que você precisa com poucos cliques, de forma simples e intuitiva</p>
+            </div>
+
+            <div class="advantage-item fade-in stagger-3">
+                <div class="advantage-icon">🚀</div>
+                <h4>Inovação Constante</h4>
+                <p>Tecnologia de ponta com atualizações regulares e novos recursos</p>
+            </div>
+
+            <div class="advantage-item fade-in stagger-4">
+                <div class="advantage-icon">⏱️</div>
+                <h4>Economia de Tempo</h4>
+                <p>Menos aplicativos, menos complicação. Mais tempo para o que importa</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- POR QUE FUNCTION PLUS -->
+    <section id="por-que">
+        <div class="section-header">
+            <div class="section-tag">Diferenciais</div>
+            <h2>O que nos torna únicos</h2>
+        </div>
+
+        <div class="why-grid">
+            <div class="why-item fade-in stagger-1">
+                <h4>Tecnologia Proprietária</h4>
+                <p>
+                    Desenvolvemos nossas próprias soluções com foco em segurança, desempenho e 
+                    experiência do usuário. Cada serviço é construído com excelência técnica.
+                </p>
+            </div>
+
+            <div class="why-item fade-in stagger-2">
+                <h4>Ecossistema Unificado</h4>
+                <p>
+                    Ao contrário de usar múltiplos aplicativos desconectados, oferecemos uma 
+                    experiência integrada onde tudo funciona em harmonia perfeita.
+                </p>
+            </div>
+
+            <div class="why-item fade-in stagger-3">
+                <h4>Suporte Dedicado</h4>
+                <p>
+                    Nossa equipe está sempre disponível para ajudar. Priorizamos a satisfação 
+                    do cliente com atendimento ágil e personalizado.
+                </p>
+            </div>
+
+            <div class="why-item fade-in stagger-4">
+                <h4>Acessibilidade para Todos</h4>
+                <p>
+                    Criamos soluções pensando em todos os públicos. Interfaces intuitivas, 
+                    recursos de acessibilidade e preços justos.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CLIENTES -->
+    <section id="clientes">
+        <div class="section-header">
+            <div class="section-tag">Depoimentos</div>
+            <h2>Quem confia na Function Plus</h2>
+            <p class="section-description">
+                Veja o que nossos usuários dizem sobre a experiência
+            </p>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card fade-in stagger-1">
+                <div class="quote-icon">"</div>
+                <p class="testimonial-text">
+                    "O Dindin salvou e divou a minha vida! Consegui finalmente fugir do agiota que devia há 20 anos que ameaçava minha família e matando ele.
+					N tem nada haver com o app, mas to feliz 😊. "
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">M</div>
+                    <div class="author-info">
+                        <h5>Mariana Silva</h5>
+                        <p>Ex-presidiária</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card fade-in stagger-2">
+                <div class="quote-icon">"</div>
+                <p class="testimonial-text">
+                    "O Falow é incrível! Poder entender meu cachorro através da tradução de sons 
+                    foi uma experiência única. A tecnologia da Function Plus é impressionante."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">R</div>
+                    <div class="author-info">
+                        <h5>Roberto Andrade</h5>
+                        <p>Veterinário</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card fade-in stagger-3">
+                <div class="quote-icon">"</div>
+                <p class="testimonial-text">
+                    "Ter tudo integrado em um só lugar mudou minha rotina. O Coé para conversar, 
+                    o Dindin para pagar e o Falow para traduzir. Perfeito!"
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">A</div>
+                    <div class="author-info">
+                        <h5>Ana Costa</h5>
+                        <p>Designer UX/UI</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		 <div class="testimonial-card fade-in stagger-3">
+                <div class="quote-icon">"</div>
+                <p class="testimonial-text">
+                    "Dá para ver a vida da rapaziada daqui de Extrema no Introz. Falando nisso, vô comer um no Renatão.
+					Cabei d ver isso aq. Vo ate comer o hamburgui do renatão kkkkk"
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">E</div>
+                    <div class="author-info">
+                        <h5>Everson Zóio</h5>
+                        <p>Influencer falido</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTATO E FORMULÁRIO -->
+    <section id="contato">
+        <div class="section-header">
+            <div class="section-tag">Contato</div>
+            <h2>Vamos conversar?</h2>
+            <p class="section-description">
+                Entre em contato conosco ou preencha o formulário abaixo
+            </p>
+        </div>
+
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div>
+                        <h4>E-mail</h4>
+                        <p>contato@functionplus.com</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div>
+                        <h4>Telefone</h4>
+                        <p>+55 (91) 91017-1610</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <h4>Endereço</h4>
+                        <p>Xique Xique, Bahia, Brasil</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 style="margin-bottom: 1rem;">Redes Sociais</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link" title="Instagram">📷</a>
+						<a href="https://wa.me/5591980171610" class="social-link" title="Whastsapp">📞</a>
+                        <a href="#" class="social-link" title="X (Twitter)">🐦</a>
+                        <a href="#" class="social-link" title="Facebook">👥</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-container">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nome Completo *</label>
+                        <input type="text" id="name" name="name" required placeholder="Seu nome">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">E-mail *</label>
+                        <input type="email" id="email" name="email" required placeholder="seu@emailaqui.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="interest">Interesse *</label>
+                        <select id="interest" name="interest" required>
+                            <option value="">Selecione uma opção</option>
+                            <option value="servicos">Conhecer os Serviços</option>
+                            <option value="parcerias">Oportunidades de Parceria</option>
+                            <option value="novidades">Receber Novidades</option>
+                            <option value="suporte">Suporte Técnico</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Mensagem</label>
+                        <textarea id="message" name="message" placeholder="Conte-nos mais sobre seu interesse..."></textarea>
+                    </div>
+
+                    <button type="submit" class="form-submit">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Function+</div>
+            <p class="footer-text">
+                Simplificando sua vida digital com tecnologia integrada e inovadora
+            </p>
+            <div class="footer-links">
+                <a href="#services">Serviços</a>
+                <a href="#vantagens">Vantagens</a>
+                <a href="#por-que">Por Que Function Plus</a>
+                <a href="#clientes">Clientes</a>
+                <a href="#contato">Contato</a>
+            </div>
+            <p class="copyright">
+                © 2026 Function Plus. Todos os direitos reservados.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Form submission handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                interest: document.getElementById('interest').value,
+                message: document.getElementById('message').value
+            };
+            
+            // Simulate form submission
+            alert('Obrigado pelo seu interesse! Em breve entraremos em contato.');
+            this.reset();
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
